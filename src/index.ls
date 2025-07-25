@@ -20,6 +20,7 @@ mod = ({root, ctx, data, parent, t, i18n}) ->
       init: slider: ({node}) ~>
         lc.ldrs = new ldslider root: node, min: 0, max: 10, step: 1
         lc.ldrs.on \change, ~> @value {value: it}
+      text: content: ({node}) ~> (@value! or {}).value or '-'
       handler: slider: ({node}) ~> 
         lc.ldrs.set ((@value! or {}).value or 0)
 
