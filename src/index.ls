@@ -1,16 +1,19 @@
 module.exports =
   pkg:
-    name: "@makeform/slider", extend: name: '@makeform/common'
+    name: \@makeform/slider
+    extend: name: \@makeform/common
+    host: name: \@grantdash/composer
     dependencies: [
     * name: \ldslider
     * name: \ldslider, type: \css
     ]
-  init: (opt) -> opt.pubsub.fire \subinit, mod: mod(opt)
+  init: (opt) ->
+    opt.pubsub.on \inited, (o = {}) ~> @ <<< o
+    opt.pubsub.fire \subinit, mod: mod.call @, opt
+
 mod = ({root, ctx, data, parent, t, i18n}) ->
   {ldview,ldslider} = ctx
   lc = {}
-  config:
-    time: enabled: type: \boolean
   init: ->
     lc = {}
     @on \change, ~> @view.render <[slider]>
