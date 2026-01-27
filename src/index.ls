@@ -17,15 +17,15 @@ mod = ({root, ctx, data, parent, t, i18n}) ->
   init: ->
     lc = {}
     @on \change, ~> @view.render <[slider]>
-    handler = ({node}) ~> @value node.value
     @view = view = new ldview do
       root: root
       init: slider: ({node}) ~>
         lc.ldrs = new ldslider root: node, min: 0, max: 10, step: 1
-        lc.ldrs.on \change, ~> @value {value: it}
-      text: content: ({node}) ~> (@value! or {}).value or '-'
+        lc.ldrs.on \change, ~> @value {v: it}
+      text: content: ({node}) ~> (@value! or {}).v or '-'
       handler: slider: ({node}) ~> 
-        lc.ldrs.set ((@value! or {}).value or 0)
+        lc.ldrs.set ((@value! or {}).v or 0)
 
   render: -> @view.render!
+  content: (v) -> if v and typeof(v) == \object => v.v else v
 
