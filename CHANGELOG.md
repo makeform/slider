@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.2.1
+
+ - upgrade dependencies
+
+
 ## v0.2.0
 
  - use `v` instead of `value` to align with input block
